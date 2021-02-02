@@ -110,17 +110,11 @@ function mainClick() {
             adTodoli();
         });
 
-        hiddenBtn.addEventListener('click', function (e) {
-            if (e.ctrlKey || e.metaKey) {
-                if (mainArray[i].perform) {
-                    return;
-                } else {
-                    mainArray[i].hidden = !mainArray[i].hidden;
-                    mainArray[i].important = false;
-                }
-                updateLocalStorage();
-                adTodoli();
-            }
+        hiddenBtn.addEventListener('dblclick', function () {
+            mainArray[i].hidden = !mainArray[i].hidden;
+            mainArray[i].important = false;
+            updateLocalStorage();
+            adTodoli();
         });
 
         btnImportant.addEventListener('click', function () {
@@ -139,7 +133,7 @@ function mainClick() {
             }
             updateLocalStorage();
             adTodoli();
-        })
+        });
 
     }
 }
