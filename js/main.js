@@ -1,7 +1,8 @@
 let adMessage = document.querySelector('.todo_btn'),
     input = document.querySelector('.todo_in'),
     messagesBody = document.querySelector('.todo_body'),
-    clearAllBtn = document.querySelector('.clear_todo');
+    clearAllBtn = document.querySelector('.clear_todo'),
+    hiddenItem;
 
 let mainArray = [];
 
@@ -37,14 +38,32 @@ adMessage.addEventListener('click', function () {
     }
 });
 
+input.addEventListener('keydown', function (e) {
+    if (!input.value || input.value.trim() === '') {
+        return input.value = '';
+    } else if (e.keyCode === 13) {
+        eventObject();
+        input.value = '';
+    }
+})
+
 function adTodoli() {
+
+    if (mainArray.length === 0) {
+        messagesBody.innerHTML = '';
+    } else {
+        hiddenFilterArray();
+        performFilterArray();
+        importantFilterArray();
+    }
+
     let message = '';
 
-    mainArray.forEach(function (item, i) {
+    mainArray.forEach(function (item) {
         message +=
             `<li class="liItem ${item.important} ${item.perform} ${item.hidden}">
                     <span class="lolka ${item.perform ? 'performTaskOk' : 'performTaskNoOk'}">${item.perform ? 'Ok' : '---'}</span>
-                    <span class="divMessage ${item.perform ? 'complete' : ''} ${item.hidden ? 'hidden' : ''} ${item.important ? 'important' : ''}">${item.message}</span>
+                    <span class="divMessage ${item.perform ? 'complete' : ''} ${item.hidden ? 'hidden' : ''} ${item.important ? 'important' : ''}">${item.hidden ? '****' : item.message}</span>
                     <span class="btnWr">
                         <button type="button" class="btnHidden">H</button>
                         <button type="button" class="btnImportant">!</button>
@@ -56,6 +75,21 @@ function adTodoli() {
     })
 }
 
+function performFilterArray() {
+    let performItem = mainArray.length && mainArray.filter(item => item.perform === true);
+    let notPerformItem = mainArray.length && mainArray.filter(item => item.perform === false);
+    mainArray = [...notPerformItem, ...performItem];
+}
+
+function importantFilterArray() {
+    let importantItem = mainArray.length && mainArray.filter(item => item.important === true);
+    let notImportantItem = mainArray.length && mainArray.filter(item => item.important === false);
+    mainArray = [...importantItem, ...notImportantItem];
+}
+
+function hiddenFilterArray() {
+    hiddenItem = mainArray.length && mainArray.filter(item => item.hidden === true);
+}
 
 function mainClick() {
     let allLi = messagesBody.querySelectorAll('.liItem');
@@ -65,50 +99,59 @@ function mainClick() {
         let liMessage = allLi[i].querySelector('.divMessage');
         let hiddenBtn = allLi[i].querySelector('.btnHidden');
         let btnImportant = allLi[i].querySelector('.btnImportant');
-        let btnDelTask = messagesBody.querySelectorAll('.delTask');
+        let btnDelTask = allLi[i].querySelector('.delTask');
 
         liMessage.addEventListener('click', function () {
-            mainArray[i].perform = !mainArray[i].perform;
+            if (!mainArray[i].hidden) {
+                mainArray[i].perform = !mainArray[i].perform;
+                mainArray[i].important = false;
+            }
             updateLocalStorage();
             adTodoli();
         });
 
         hiddenBtn.addEventListener('click', function (e) {
             if (e.ctrlKey || e.metaKey) {
-                mainArray[i].hidden = !mainArray[i].hidden;
+                if (mainArray[i].perform) {
+                    return;
+                } else {
+                    mainArray[i].hidden = !mainArray[i].hidden;
+                    mainArray[i].important = false;
+                }
                 updateLocalStorage();
                 adTodoli();
             }
         });
 
-        btnImportant.addEventListener('click', function (e) {
-            mainArray[i].important = !mainArray[i].important;
+        btnImportant.addEventListener('click', function () {
+            if (mainArray[i].perform || mainArray[i].hidden) {
+                return;
+            } else {
+                mainArray[i].important = !mainArray[i].important;
+            }
             updateLocalStorage();
             adTodoli();
         });
 
-        // btnDelTask.addEventListener('click', function () {
-        //     for (let d = 0; d < mainArray.length; d++) {
-        //         mainArray.splice(1, 1);
-        //         adTodoli();
-        //         updateLocalStorage();
-        //     }
-        // });
+        btnDelTask.addEventListener('click', function () {
+            if (!mainArray[i].hidden) {
+                mainArray.splice(i, 1);
+            }
+            updateLocalStorage();
+            adTodoli();
+        })
+
     }
 }
 
 clearAllBtn.addEventListener('click', function () {
-    mainArray = [];
-    messagesBody.innerHTML = '';
-    input.value = '';
+    if (!mainArray.length) {
+        return;
+    }
     localStorage.clear();
+    input.value = '';
+    messagesBody.innerHTML = '';
+    mainArray = [...hiddenItem];
+    updateLocalStorage();
     adTodoli();
 });
-
-// messagesBody.addEventListener('contextmenu', function (e) {
-//     e.preventDefault();
-// })
-
-
-
-
