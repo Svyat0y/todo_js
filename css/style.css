@@ -100,6 +100,8 @@ p {
 	background: red;
 	color: azure;
 	padding: 5px;
+	width: 30%;
+	margin-left: 10px;
 }
 
 .todo_body .liItem {
@@ -109,15 +111,14 @@ p {
 	margin: 10px 0;
 }
 
-.liItem.important {
-	background: red;
+.important {
+	color: rgba(255, 0, 0, 1);;
 }
-.liItem.complete {
-	background: green;
+
+.hidden {
+	color: rgba(255, 165, 0, 1);
 }
-.liItem.hidden {
-	background: orange;
-}
+
 .btnDel {
 	float: right;
 	height: 100%;
@@ -130,37 +131,45 @@ p {
 	font-size: 16px;
 }
 
-.performTaskGreen,
-.performTaskRed {
+.performTaskOk,
+.performTaskNoOk {
 	min-width: 30px;
 }
 
-.performTaskGreen {
+.performTaskOk {
 	color: green;
-}
-
-.performTaskRed {
-	color: red;
 }
 
 .btnHidden,
 .btnImportant,
 .delTask {
 	padding: 0 10px;
-	min-width: 20px;
-	max-height: 25px;
+	min-width: 25px;
+	height: 25px;
 }
 
 .btnHidden {
 	background: rgba(255, 165, 0, 0.5);
 }
 
+.btnHidden:hover {
+	background: rgba(255, 165, 0, 0.7);
+}
+
 .btnImportant {
 	background: rgba(255, 0, 0, 0.7);
 }
 
+.btnImportant:hover {
+	background: rgba(255, 0, 0, 0.9);
+}
+
 .delTask {
 	background: rgba(139, 0, 0, 0.8);
+}
+
+.delTask:hover {
+	background: rgba(139, 0, 0, 1);
 }
 
 .remove_input {
@@ -175,9 +184,19 @@ p {
 	width: 100%;
 }
 
-.divMessage p {
+.divMessage {
 	padding: 0 10px;
 	word-break: break-all;
+	cursor: pointer;
+}
+
+.divMessage.complete {
+	color: green;
+	text-decoration: line-through;
+}
+
+.divMessage:hover {
+	transform: scale(1.005);
 }
 
 .btnWr {
