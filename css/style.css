@@ -51,7 +51,7 @@ p {
 }
 
 .todo_wrapper {
-	max-width: 500px;
+	max-width: 100%;
 	height: auto;
 	margin: 50px auto;
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
@@ -193,6 +193,7 @@ p {
 
 .divMessage:hover {
 	transform: scale(1.005);
+	color: green;
 }
 
 
