@@ -111,8 +111,10 @@ function mainClick() {
         });
 
         hiddenBtn.addEventListener('dblclick', function () {
-            mainArray[i].hidden = !mainArray[i].hidden;
-            mainArray[i].important = false;
+            if (!mainArray[i].perform) {
+                mainArray[i].hidden = !mainArray[i].hidden;
+                mainArray[i].important = false;
+            }
             updateLocalStorage();
             adTodoli();
         });
