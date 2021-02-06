@@ -1,4 +1,4 @@
-/*Обнуление*/
+/* reset styles (optional) */
 *{
 	padding: 0;
 	margin: 0;
@@ -44,14 +44,17 @@ p {
 
 /*--------------------*/
 
+/* your parent block */
 .container {
-    max-width: 1170px;
-    margin: auto;
-    padding: 0 15px;
+	max-width: 500px;
+	margin: auto;
+	padding: 0 15px;
 }
 
+/* your parent block */
+
 .todo_wrapper {
-	max-width: 500px;
+	max-width: 100%;
 	height: auto;
 	margin: 50px auto;
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
@@ -93,6 +96,7 @@ p {
 .todo_btn {
 	padding: 5px;
 	background: #C4AA00;
+	letter-spacing: 2px;
 	width: 30%;
 	margin-left: 10px;
 }
@@ -111,6 +115,7 @@ p {
 
 .clear_todo {
 	background: #C4AA00;
+	letter-spacing: 2px;
 	padding: 5px;
 	width: 30%;
 	height: 30px;
@@ -152,26 +157,32 @@ p {
 }
 .btnHidden:hover {
 	background: rgba(255, 165, 0, 0.7);
+	transform: scale(1.2);
 }
 .btnImportant {
 	background: transparent;
 }
 .btnImportant:hover {
 	background: rgba(255, 0, 0, 0.9);
+	transform: scale(1.2);
+
 }
 .delTask {
 	background: transparent;
 }
 .delTask:hover {
 	background: rgba(139, 0, 0, 1);
+	transform: scale(1.2);
+
 }
 
 .divMessage {
 	color: white;
+	letter-spacing: 0.5px;
 	width: 100%;
 	padding: 0 10px;
-	word-break: break-all;
 	cursor: pointer;
+	font-size: 16px;
 }
 
 .performTaskOk {
@@ -192,7 +203,7 @@ p {
 }
 
 .divMessage:hover {
-	transform: scale(1.005);
+	transform: scale(1.02);
 }
 
 
