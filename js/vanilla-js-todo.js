@@ -66,7 +66,7 @@ const CustomTodo = function (e) {
             message +=
                 `<li class="liItem ${item.important} ${item.perform} ${item.hidden}">
                     <span class="${item.perform ? 'performTaskOk' : 'performTaskNoOk'}">${item.perform ? 'Ok' : '---'}</span>
-                    <span class="divMessage ${item.perform ? 'complete' : ''} ${item.hidden ? 'hidden' : ''} ${item.important ? 'important' : ''}">${item.hidden ? '****' : item.message}</span>
+                    <span class="divMessage ${item.perform ? 'complete' : ''}${item.hidden ? 'hidden' : ''}${item.important ? 'important' : ''}">${item.hidden ? '****' : item.message}</span>
                     <span class="btnWr">
                         <button type="button" class="btnHidden">H</button>
                         <button type="button" class="btnImportant">!</button>
